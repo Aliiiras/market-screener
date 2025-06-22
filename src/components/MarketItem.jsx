@@ -1,10 +1,16 @@
-// import { useEffect,useState } from "react";
-// import { getMockMarketData, updateMarketData } from '../utils/MockData';
+import { motion } from "framer-motion";
 import { formatSubZeroCompact } from "./SubZero";
 
 function MarketItem({item}) {
   return (
     <div className="w-[19vw]">
+    <motion.div
+      layout
+      initial={{ opacity: 0, filter: "blur(4px)" }}
+      animate={{ opacity: 1, filter: "blur(0px)" }}
+      exit={{ opacity: 0, filter: "blur(4px)" }}
+      transition={{ duration: 0.4 }}
+    >
         <div key={item.id} className="w-full flex justify-between py-2">
             <div className="flex gap-1 items-center">
               <img src={item.image} alt={item.name} className='w-[20px] h-[20px] inline-block mr-2' />
@@ -18,6 +24,7 @@ function MarketItem({item}) {
               </span>
             </div>
         </div>
+        </motion.div>
     </div>
   )
 }
