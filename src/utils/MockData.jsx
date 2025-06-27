@@ -18,13 +18,13 @@ const coins = [
     image: '/chainlink.png',
    },
   { id: 'dot', name: 'Polkadot',pair:'DOTUSDT', price: 6.24,volume: 2254321,isNew: true, rank: 7,
-    image: '/Polkadot-new.png',
+    image: '/polkadot-new.png',
    },
   { id: 'avax', name: 'Avalanche',pair:'AVAUSDT', price: 29.73,volume: 1654321,isNew: false, rank: 8,
-    image: '/Avalanche.png',
+    image: '/avalanche.png',
    },
   { id: 'shib', name: 'Shiba',pair:'SHIBUSDT', price: 0.00073,volume: 854321,isNew: true, rank: 9,
-    image: '/Shiba-inu.png',
+    image: '/shiba-inu.png',
    },
 ];
 
@@ -38,7 +38,7 @@ export function updateMarketData(data) {
   // Update prices with random +/- % fluctuation
     const updated = data.map((coin) => {
     const oldPrice = coin.price;
-    const fluctuation = (Math.random() - 0.5) * 0.1; // +/- 5%
+    const fluctuation = (Math.random() - 0.2) * 0.05; // +/- 5%
     const newPrice = coin.price * (1 + fluctuation);
     const percentageChange = getPercentageChange(newPrice, oldPrice);
     coin.volume = Math.floor(Math.random() * 1000000); // changing volume
