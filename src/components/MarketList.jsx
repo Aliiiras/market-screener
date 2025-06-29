@@ -1,10 +1,15 @@
 // import { getMockMarketData, updateMarketData } from '../utils/MockData';
 // import { useEffect } from 'react';
 // import { useState } from 'react';
-import MarketItem from './MarketItem';
+// import MarketItem from './MarketItem';
 import { motion } from 'framer-motion';
+import LazyFadeIn from '../lib/useIsInViewport';
+import { lazy } from 'react';
+import { useMemo } from 'react';
 
 function MarketList({title,coins,icon}) { //get props
+const LazyMarketItem = useMemo(() => lazy(() => import('./MarketItem')), []);
+
   return (
 
     <div className='flex gap-4'>
@@ -13,9 +18,20 @@ function MarketList({title,coins,icon}) { //get props
             <img src={icon} className='w-[16px] h-[16px] inline-block mr-2 align-middle rounded'>
             </img>{title}</span>
           <motion.div layout className="space-y-0">
-        {coins.map((item) => (
+
+
+{coins.map((item) => (
+  <LazyFadeIn
+    key={item.id}
+    LazyComponent={LazyMarketItem}
+    item={item}
+    threshold={0.15}
+  />
+))}
+
+{/* {coins.map((item) => (
           <MarketItem key={item.id} item={item} /> //send props as a item
-        ))}
+        ))}  */}
             </motion.div>
         </div>
     </div>
